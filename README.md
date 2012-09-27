@@ -1,7 +1,7 @@
 .obj Importer
 =============
 
-Taken from (OBJ_IMPORT)[http://www.pixelnerve.com/processing/libraries/objimport/]
+Taken from [OBJ_IMPORT](http://www.pixelnerve.com/processing/libraries/objimport/)
 
 Removed Processing support.
 
