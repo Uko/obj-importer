@@ -24,7 +24,6 @@ public class WavefrontObject {
 	private ArrayList<Group> groups = new ArrayList<Group>();
 	private Hashtable<String,Group> groupsDirectAccess = new Hashtable<String,Group>();
 	Hashtable<String, Material> materials = new Hashtable<String, Material>(); 
-	public String fileName;
 	
 	private ObjLineParserFactory parserFactory ;
 
@@ -67,9 +66,7 @@ public class WavefrontObject {
 	public WavefrontObject(String fileName,float xScale, float yScale, float zScale, Vertex translation,Vertex rotation)
 	{
 		try
-		{
-			this.fileName = fileName;
-			
+		{		
 			this.translate = translation;
 			this.rotate= rotation;
 			
@@ -85,13 +82,70 @@ public class WavefrontObject {
 			if ( lastSlashIndex != -1)
 				this.contextfolder = fileName.substring(0,lastSlashIndex+1);
 			
-			parse(fileName);
+			InputStream fileInput = this.getClass().getResourceAsStream(fileName);
+			if (fileInput == null) {
+				// Could not find the file in the jar.
+				try
+				{
+					File file = new File(fileName);
+					if (file.exists())
+						fileInput = new FileInputStream(file);
+				}
+				catch(Exception e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+			
+			parse(fileInput);
 			
 			calculateRadius();
 		}
 		catch(Exception e )
 		{
 			System.out.println("Error, could not load obj:"+fileName);
+		}
+	}
+	
+	public WavefrontObject(InputStream stream)
+	{
+		this(stream,1f,1f,1f,new Vertex(),new Vertex());
+	}
+	
+	public WavefrontObject(InputStream stream,float xScale, float yScale, float zScale)
+	{
+		this(stream,xScale,yScale,zScale,new Vertex(),new Vertex());
+	}
+	
+	public WavefrontObject(InputStream stream, float scale) 
+	{	
+		this(stream,scale,scale,scale,new Vertex(),new Vertex());
+	}
+	
+	public WavefrontObject(InputStream stream,float scale,Vertex translation,Vertex rotation)
+	{
+		this(stream,scale,scale,scale,translation,rotation);
+	}
+	
+	public WavefrontObject(InputStream stream,float xScale, float yScale, float zScale, Vertex translation,Vertex rotation)
+	{
+		try
+		{
+			
+			this.translate = translation;
+			this.rotate= rotation;
+			
+			this.xScale= xScale;
+			this.yScale= yScale;
+			this.zScale= zScale;
+			
+			parse(stream);
+			
+			calculateRadius();
+		}
+		catch(Exception e )
+		{
+			System.out.println("Error, could not load obj:"+stream);
 		}
 	}
 
@@ -115,24 +169,12 @@ public class WavefrontObject {
 	}
 
 
-	public void parse(String fileName)  
+	public void parse(InputStream stream)  
 	{
 		parserFactory = new ObjLineParserFactory(this);
 		
 		
-		InputStream fileInput = this.getClass().getResourceAsStream(fileName);
-		if (fileInput == null)
-			// Could not find the file in the jar.
-			try
-			{
-				File file = new File(fileName);
-				if (file.exists())
-					fileInput = new FileInputStream(file);
-			}
-			catch(Exception e2)
-			{
-				e2.printStackTrace();
-			}
+		
 		
 		
 		
@@ -140,7 +182,7 @@ public class WavefrontObject {
 		
 		try 
 		{
-			in = new BufferedReader(new InputStreamReader(fileInput));
+			in = new BufferedReader(new InputStreamReader(stream));
 		
 		
 			String currentLine = null;
@@ -153,13 +195,13 @@ public class WavefrontObject {
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Error reading file :'"+fileName+"'");
+			throw new RuntimeException("Error reading file");
 		}
 		
 
 		if (Logger.logging)
 		{
-			Logger.log("Loaded OBJ from file '"+fileName+"'");
+			Logger.log("Loaded OBJ from file");
 			Logger.log(getVertices().size()+" vertices.");
 			Logger.log(getNormals().size()+" normals.");
 			Logger.log(getTextures().size()+" textures coordinates.");
