@@ -41,8 +41,12 @@ public class MaterialFileParser extends LineParser {
 			try
 			{
 				File file = new File(pathToMTL);
-				if (file.exists())
-					fileInput = new FileInputStream(file);
+				if (!file.exists()) {
+				    System.err.println("File " + pathToMTL + " doesn't exitst!");
+				    return;
+				}
+				fileInput = new FileInputStream(file);
+				
 			}
 			catch(Exception e2)
 			{
