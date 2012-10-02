@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 //import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.AccessControlException;
 import java.util.Hashtable;
 
 import com.obj.Material;
@@ -41,8 +42,15 @@ public class MaterialFileParser extends LineParser {
 			try
 			{
 				File file = new File(pathToMTL);
-				if (!file.exists()) {
-				    System.err.println("File " + pathToMTL + " doesn't exitst!");
+				
+				boolean fileOk;
+				try {
+				    fileOk = file.exists();
+				} catch (AccessControlException e) {
+				    fileOk = false;
+				}
+				if (!fileOk) {
+				    System.err.println("Could not process file: " + pathToMTL);
 				    return;
 				}
 				fileInput = new FileInputStream(file);
