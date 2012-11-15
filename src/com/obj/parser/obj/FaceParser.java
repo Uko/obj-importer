@@ -37,8 +37,7 @@ public class FaceParser extends LineParser {
 				parseQuad();
 				break;
 			default: 
-				//throw new RuntimeException("Could not identify face around '" + object.getFaces()+1 );
-				break;
+				parsePolyFace(words.length-1);
 		}
 		
 		
@@ -107,6 +106,12 @@ public class FaceParser extends LineParser {
 		face.setType(Face.GL_QUADS);
 		parseLine(4);
 	}
+	
+	private void parsePolyFace(int verticesCount) 
+        {
+                face.setType(Face.POLY_FACE);
+                parseLine(verticesCount);
+        }
 
 
 	@Override
@@ -123,65 +128,25 @@ public class FaceParser extends LineParser {
 			wavefrontObject.getGroupsDirectAccess().put(group.getName(),group);
 			wavefrontObject.setCurrentGroup(group);
 		}
+		
+		for (int i = 0; i < this.vertices.length; ++i) {
+		    group.vertices.add( this.vertices[i] );
+		    group.normals.add( this.normals[i] );
+		    group.texcoords.add( this.textures[i] );
+		    group.indices.add( group.indexCount++ );
+		}
+		
+		face.vertIndices = vindices;
+                face.normIndices = nindices;
+                face.texIndices = tindices;
+                face.setNormals(this.normals);
+                face.setNormals(this.normals);
+                face.setVertices(this.vertices);
+                face.setTextures(this.textures);
+                
+                wavefrontObject.getCurrentGroup().addFace(face);
 
-		if( this.vertices.length == 3 )
-		{
-			// Add list of vertex/normal/texcoord to current group
-			// Each object keeps a list of its own data, apart from the global list
-			group.vertices.add( this.vertices[0] );
-			group.vertices.add( this.vertices[1] );
-			group.vertices.add( this.vertices[2] );
-			group.normals.add( this.normals[0] );
-			group.normals.add( this.normals[1] );
-			group.normals.add( this.normals[2] );
-			group.texcoords.add( this.textures[0] );
-			group.texcoords.add( this.textures[1] );
-			group.texcoords.add( this.textures[2] );
-			group.indices.add( group.indexCount++ );
-			group.indices.add( group.indexCount++ );
-			group.indices.add( group.indexCount++ );	// create index list for current object
-			
-			face.vertIndices = vindices;
-			face.normIndices = nindices;
-			face.texIndices = tindices;
-			face.setNormals(this.normals);
-			face.setNormals(this.normals);
-			face.setVertices(this.vertices);
-			face.setTextures(this.textures);
-			
-			wavefrontObject.getCurrentGroup().addFace(face);
-		}
-		else
-		{
-			// Add list of vertex/normal/texcoord to current group
-			// Each object keeps a list of its own data, apart from the global list
-			group.vertices.add( this.vertices[0] );
-			group.vertices.add( this.vertices[1] );
-			group.vertices.add( this.vertices[2] );
-			group.vertices.add( this.vertices[3] );
-			group.normals.add( this.normals[0] );
-			group.normals.add( this.normals[1] );
-			group.normals.add( this.normals[2] );
-			group.normals.add( this.normals[3] );
-			group.texcoords.add( this.textures[0] );
-			group.texcoords.add( this.textures[1] );
-			group.texcoords.add( this.textures[2] );
-			group.texcoords.add( this.textures[3] );
-			group.indices.add( group.indexCount++ );
-			group.indices.add( group.indexCount++ );
-			group.indices.add( group.indexCount++ );
-			group.indices.add( group.indexCount++ );	// create index list for current object
-			
-			face.vertIndices = vindices;
-			face.normIndices = nindices;
-			face.texIndices = tindices;
-			face.setNormals(this.normals);
-			face.setNormals(this.normals);
-			face.setVertices(this.vertices);
-			face.setTextures(this.textures);
-			
-			wavefrontObject.getCurrentGroup().addFace(face);
-		}
+		
 	}
 	
 	static int faceC = 0;

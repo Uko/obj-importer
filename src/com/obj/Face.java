@@ -8,6 +8,7 @@ public class Face {
 
 	public static int GL_TRIANGLES =1;
 	public static int GL_QUADS =2;
+	public static int POLY_FACE =3;
 	
 	public int[] vertIndices;
 	public int[] normIndices;
