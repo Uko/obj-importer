@@ -1,4 +1,4 @@
-package utils;
+package com.obj.utils;
 
 public class Logger {
 

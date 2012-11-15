@@ -4,6 +4,7 @@ manifest.txt
 .project
 .metadata
 bin/**
+target/**
 tmp/**
 tmp/**/*
 *.tmp
@@ -14,6 +15,8 @@ local.properties
 .classpath
 .settings/
 .loadpath
+.idea/
+*.iml
 
 # External tool builders
 .externalToolBuilders/

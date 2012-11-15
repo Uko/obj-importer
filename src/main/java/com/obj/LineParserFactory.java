@@ -7,7 +7,7 @@ import com.obj.parser.LineParser;
 
 public abstract class LineParserFactory {
 
-	protected Hashtable<String,LineParser> parsers = new Hashtable<String,LineParser>();
+	protected final Hashtable<String,LineParser> parsers = new Hashtable<String,LineParser>();
 	protected WavefrontObject object = null;
 
 	
@@ -31,7 +31,7 @@ public abstract class LineParserFactory {
 		// lineType is the first word in the line (except v,vp,vn,vt)
 		
 		if (lineWords.length < 1)	
-			return  new DefaultParser();;
+			return  new DefaultParser();
 		
 		String lineType = lineWords[0];
 		

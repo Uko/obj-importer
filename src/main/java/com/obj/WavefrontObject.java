@@ -12,7 +12,7 @@ import com.obj.parser.LineParser;
 import com.obj.parser.obj.ObjLineParserFactory;
 
 //import engine.Engine;
-import utils.Logger;
+import com.obj.utils.Logger;
 
 
 public class WavefrontObject {
