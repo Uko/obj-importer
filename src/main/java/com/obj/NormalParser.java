@@ -5,7 +5,7 @@ import com.obj.parser.LineParser;
 
 public class NormalParser extends LineParser {
 
-	Vertex vertex = null;
+	private Vertex vertex = null;
 	
 	public NormalParser() {
 		// TODO Auto-generated constructor stub

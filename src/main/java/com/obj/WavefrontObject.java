@@ -21,9 +21,9 @@ public class WavefrontObject {
 	private ArrayList<Vertex> normals = new ArrayList<Vertex>();
 	private ArrayList<TextureCoordinate> textures = new ArrayList<TextureCoordinate>();
 	//private ArrayList<Face> faces = new ArrayList<Face>();
-	private ArrayList<Group> groups = new ArrayList<Group>();
-	private Hashtable<String,Group> groupsDirectAccess = new Hashtable<String,Group>();
-	Hashtable<String, Material> materials = new Hashtable<String, Material>(); 
+	private final ArrayList<Group> groups = new ArrayList<Group>();
+	private final Hashtable<String,Group> groupsDirectAccess = new Hashtable<String,Group>();
+	private Hashtable<String, Material> materials = new Hashtable<String, Material>();
 	
 	private ObjLineParserFactory parserFactory ;
 
@@ -33,7 +33,7 @@ public class WavefrontObject {
 	
 	private String contextfolder ="" ;
 	
-	public double radius=0;
+	private double radius=0;
 	
 	
 	public float xScale; 
@@ -41,7 +41,7 @@ public class WavefrontObject {
 	public float zScale;
 	
 	public Vertex translate;
-	public Vertex rotate;
+	private Vertex rotate;
 	
 	public WavefrontObject(String fileName)
 	{
@@ -63,7 +63,7 @@ public class WavefrontObject {
 		this(fileName,scale,scale,scale,translation,rotation);
 	}
 	
-	public WavefrontObject(String fileName,float xScale, float yScale, float zScale, Vertex translation,Vertex rotation)
+	private WavefrontObject(String fileName, float xScale, float yScale, float zScale, Vertex translation, Vertex rotation)
 	{
 		try
 		{		
@@ -127,7 +127,7 @@ public class WavefrontObject {
 		this(stream,scale,scale,scale,translation,rotation);
 	}
 	
-	public WavefrontObject(InputStream stream,float xScale, float yScale, float zScale, Vertex translation,Vertex rotation)
+	private WavefrontObject(InputStream stream, float xScale, float yScale, float zScale, Vertex translation, Vertex rotation)
 	{
 		try
 		{
@@ -153,7 +153,7 @@ public class WavefrontObject {
 	
 
 	private void calculateRadius() {
-		double currentNorm = 0;
+		double currentNorm;
 		for(Vertex vertex : vertices)
 		{
 			currentNorm = vertex.norm(); 
@@ -169,7 +169,7 @@ public class WavefrontObject {
 	}
 
 
-	public void parse(InputStream stream)  
+	void parse(InputStream stream)
 	{
 		parserFactory = new ObjLineParserFactory(this);
 		
@@ -178,19 +178,18 @@ public class WavefrontObject {
 		
 		
 		
-		BufferedReader in = null;
+		BufferedReader in;
 		
 		try 
 		{
 			in = new BufferedReader(new InputStreamReader(stream));
 		
 		
-			String currentLine = null;
+			String currentLine;
 			while((currentLine = in.readLine()) != null)
 				parseLine(currentLine);
-				
-			if (in != null)
-				in.close();
+
+            in.close();
 		
 		} 
 		catch (Exception e) {
@@ -417,7 +416,7 @@ public class WavefrontObject {
 		this.currentGroup = currentGroup;
 	}
 
-	public String getBoudariesText() {
+	String getBoudariesText() {
 		
 		float minX=0;
 		float maxX=0;
@@ -426,7 +425,7 @@ public class WavefrontObject {
 		float minZ=0;
 		float maxZ=0;
 		
-		Vertex currentVertex = null;
+		Vertex currentVertex;
 		for (int i=0; i < getVertices().size(); i++)
 		{
 			currentVertex = getVertices().get(i);

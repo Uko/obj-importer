@@ -6,9 +6,9 @@ import com.obj.Vertex;
 	
 public class Face {
 
-	public static int GL_TRIANGLES =1;
-	public static int GL_QUADS =2;
-	public static int POLY_FACE =3;
+	public static final int GL_TRIANGLES =1;
+	public static final int GL_QUADS =2;
+	public static final int POLY_FACE =3;
 	
 	public int[] vertIndices;
 	public int[] normIndices;

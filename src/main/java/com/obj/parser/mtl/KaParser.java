@@ -8,7 +8,7 @@ import com.obj.parser.LineParser;
 
 public class KaParser extends LineParser {
 
-	Vertex ka = null;
+	private Vertex ka = null;
 	
 	@Override
 	public void incoporateResults(WavefrontObject wavefrontObject) {

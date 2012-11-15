@@ -113,7 +113,7 @@ public class Vertex {
 		return mult((float)factor);
 	}
 	
-	public Vertex mult(float factor) {
+	Vertex mult(float factor) {
 		return new Vertex(getX()*factor,getY()*factor,getZ()*factor);
 	}
 	public Vertex copyAndSub(Vertex v) {

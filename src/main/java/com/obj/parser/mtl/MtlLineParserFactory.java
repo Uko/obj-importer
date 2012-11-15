@@ -15,7 +15,7 @@ import com.obj.parser.mtl.MaterialParser;
 
 
 
-public class MtlLineParserFactory extends LineParserFactory
+class MtlLineParserFactory extends LineParserFactory
 {
 	public MtlLineParserFactory(WavefrontObject object)
 	{

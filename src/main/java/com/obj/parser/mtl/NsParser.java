@@ -7,7 +7,7 @@ import com.obj.parser.LineParser;
 
 public class NsParser extends LineParser {
 
-	float ns;
+	private float ns;
 	
 	@Override
 	public void incoporateResults(WavefrontObject wavefrontObject) 

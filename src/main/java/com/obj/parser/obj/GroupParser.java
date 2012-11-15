@@ -6,7 +6,7 @@ import com.obj.parser.LineParser;
 
 public class GroupParser extends LineParser {
 
-    Group newGroup = null;
+    private Group newGroup = null;
 
     @Override
     public void incoporateResults(WavefrontObject wavefrontObject) {

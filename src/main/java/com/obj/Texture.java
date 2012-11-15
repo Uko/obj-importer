@@ -17,25 +17,25 @@ package com.obj;
 public class Texture {
  
   /** Texture id for this image (OpenGL) */
-  private int textureID;
+  private final int textureID;
  
   /** Width of this image */
-  private int width;
+  private final int width;
  
   /** Height of this image */
-  private int height;
+  private final int height;
  
   /** Width ratio */
-  private float	widthRatio;
+  private final float	widthRatio;
  
   /** Height ratio */
-  private float	heightRatio;
+  private final float	heightRatio;
  
   /** Texture width */
-  private int textureWidth;
+  private final int textureWidth;
  
   /** Texture heigth */
-  private int textureHeigth;
+  private final int textureHeigth;
  
 
   
@@ -61,7 +61,7 @@ public class Texture {
    * @param textureWidth Actual width of texture
    * @param textureHeight Actual height of texture
    */
-  public Texture(int textureID, int width, int height, float widthRatio, float heightRatio, int textureWidth, int textureHeight) {
+  private Texture(int textureID, int width, int height, float widthRatio, float heightRatio, int textureWidth, int textureHeight) {
     this.textureID = textureID;
     this.width = width;
     this.height = height;

@@ -6,7 +6,7 @@ import com.obj.parser.LineParser;
 
 public class VertexParser extends LineParser {
 
-	Vertex vertex = null;
+	private Vertex vertex = null;
 	
 	public VertexParser() {
 	}

@@ -11,9 +11,9 @@ import com.obj.parser.LineParser;
 public class FaceParser extends LineParser {
 
 	private Face face;
-	public int[] vindices;
-	public int[] nindices;
-	public int[] tindices;
+	private int[] vindices;
+	private int[] nindices;
+	private int[] tindices;
 	private Vertex[] vertices;
 	private Vertex[] normals;
 	private TextureCoordinate[] textures;
@@ -51,7 +51,7 @@ public class FaceParser extends LineParser {
 
 	private void parseLine( int vertexCount ) 
 	{
-		String[] rawFaces = null;
+		String[] rawFaces;
 		int currentValue;
 		
 		vindices = new int[vertexCount];
@@ -148,6 +148,4 @@ public class FaceParser extends LineParser {
 
 		
 	}
-	
-	static int faceC = 0;
 }

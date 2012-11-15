@@ -16,7 +16,7 @@ public class TextureLoader {
 
 	private TextureLoader(){}
 	private static TextureLoader instance = null;
-	private Hashtable<String,BufferedImage> bufferedImageCache = new Hashtable <String,BufferedImage>();
+	private final Hashtable<String,BufferedImage> bufferedImageCache = new Hashtable <String,BufferedImage>();
 
 	public static TextureLoader instance()
 	{
@@ -55,7 +55,7 @@ public class TextureLoader {
 	private Texture loadTexture(String path,int xOffSet, int yOffSet, int textWidth, int textHeight) {
 		
 		
-        Texture toReturn = null;
+        Texture toReturn;
        
 		BufferedImage buffImage = bufferedImageCache.get(path);
 		

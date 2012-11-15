@@ -6,7 +6,7 @@ import com.obj.parser.LineParser;
 
 public class MaterialParser extends LineParser 
 {
-		String materialName = "";
+		private String materialName = "";
 
 		@Override
 		public void parse() {

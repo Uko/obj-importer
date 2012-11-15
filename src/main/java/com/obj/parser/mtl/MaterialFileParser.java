@@ -16,7 +16,7 @@ import com.obj.parser.LineParser;
 public class MaterialFileParser extends LineParser {
 
 	Hashtable<String,Material> materials = new Hashtable<String,Material>();
-	private WavefrontObject object;
+	private final WavefrontObject object;
 	private MtlLineParserFactory parserFactory = null;
 	
 	public MaterialFileParser(WavefrontObject object )
